@@ -24,6 +24,7 @@ import {
   type ProductTraceData,
 } from "./config/contract";
 import { resolveIpfsUrl, uploadToIPFS } from "./services/ipfs";
+import { exportProductCertificateJson } from "./services/export";
 import { generateQRCode, type GeneratedQRData } from "./services/qrcode";
 import {
   assignProductCustody,
@@ -488,6 +489,15 @@ export default function App() {
                           {shortenAddress(p3Data.details.creator)}
                         </span>
                       </p>
+                      <div className="pt-1">
+                        <button
+                          type="button"
+                          onClick={() => exportProductCertificateJson(p3Data)}
+                          className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 underline"
+                        >
+                          ดาวน์โหลดใบรับรอง JSON (EUDR Compliance)
+                        </button>
+                      </div>
                     </div>
 
                     <img
