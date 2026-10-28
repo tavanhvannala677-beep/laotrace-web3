@@ -647,6 +647,14 @@ export default function App() {
               <div className="flex items-center gap-2">
                 <button
                   type="button"
+                  onClick={() => setWalletAddress(DEMO_WALLETS.FARMER)}
+                  className="px-3 py-2 rounded-xl text-xs font-medium bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 transition hidden sm:inline-flex items-center gap-1.5"
+                  title="จำลองการเข้าสู่ระบบด้วยเบอร์โทรสหกรณ์ (ไม่ต้องติดตั้ง MetaMask)"
+                >
+                  <span>📱 โหมดสหกรณ์/เบอร์โทร</span>
+                </button>
+                <button
+                  type="button"
                   onClick={() => setShowSettingsModal(true)}
                   className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition"
                   title="ตั้งค่าเชื่อมต่อหลังบ้าน"
