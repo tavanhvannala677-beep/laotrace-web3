@@ -38,3 +38,56 @@ export function exportProductCertificateJson(data: ProductTraceData): void {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
+/**
+ * ส่งออกตารางประวัติการเดินทางของสินค้า (Provenance Timeline) เป็นไฟล์ CSV
+ * เปิดได้ทันทีใน Excel หรือ Google Sheets พร้อมรองรับภาษาไทย/ลาว (UTF-8 BOM)
+ */
+export function exportProductTimelineCsv(data: ProductTraceData): void {
+  const headers = [
+    "Step",
+    "ProductID",
+    "ProductName",
+    "Category",
+    "Action",
+    "Location",
+    "IPFS_CID",
+    "Timestamp_ISO",
+    "RecordedByWallet",
+  ];
+
+  const escapeCsvCell = (value: string | number): string => {
+    const str = String(value ?? "").replace(/"/g, '""');
+    return `"${str}"`;
+  };
+
+  const rows = data.timeline.map((step, index) => [
+    index + 1,
+    data.details.productId,
+    data.details.productName,
+    data.details.category,
+    step.action,
+    step.location,
+    step.ipfsHash,
+    new Date(step.timestamp * 1000).toISOString(),
+    step.actor,
+  ]);
+
+  const csvBody = [
+    headers.map(escapeCsvCell).join(","),
+    ...rows.map((row) => row.map(escapeCsvCell).join(",")),
+  ].join("\r\n");
+
+  const blob = new Blob(["\uFEFF" + csvBody], {
+    type: "text/csv;charset=utf-8;",
+  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `laotrace-timeline-${data.details.productId}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
