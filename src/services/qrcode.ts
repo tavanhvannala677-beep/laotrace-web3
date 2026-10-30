@@ -48,3 +48,15 @@ export function generateQRCode(
     midstreamQrImageUrl,
   };
 }
+
+/**
+ * สร้างข้อความพร้อมลิงก์สำหรับแชร์ใบรับรองสินค้าให้ลูกค้าหรือคู่ค้า
+ */
+export function buildConsumerShareText(
+  productId: string,
+  productName: string
+): string {
+  const { verificationUrl } = generateQRCode(productId);
+  return `ตรวจสอบย้อนกลับแหล่งที่มาบน LAB Chain: ${productName} (ล็อต #${productId}) -> ${verificationUrl}`;
+}
+
