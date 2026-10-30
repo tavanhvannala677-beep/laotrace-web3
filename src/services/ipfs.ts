@@ -162,3 +162,12 @@ export function resolveIpfsUrl(ipfsHash: string): string {
 
   return `https://gateway.pinata.cloud/ipfs/${cleaned}`;
 }
+
+/**
+ * ตรวจสอบว่าค่าที่รับเข้ามาเป็นรหัส IPFS CID มาตรฐาน (CIDv0 Qm... หรือ CIDv1 bafy...) หรือไม่
+ */
+export function isIpfsCid(value: string): boolean {
+  const cleaned = (value || "").replace(/^ipfs:\/\//, "").trim();
+  return /^(Qm[1-9A-HJ-NP-Za-km-z]{44}|bafy[a-z2-7]{20,})$/i.test(cleaned);
+}
+
