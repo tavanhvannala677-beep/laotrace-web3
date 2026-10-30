@@ -60,3 +60,19 @@ export function buildConsumerShareText(
   return `ตรวจสอบย้อนกลับแหล่งที่มาบน LAB Chain: ${productName} (ล็อต #${productId}) -> ${verificationUrl}`;
 }
 
+/**
+ * คัดลอกลิงก์หรือข้อความลง Clipboard ของเบราว์เซอร์อย่างปลอดภัย
+ */
+export async function copyTextToClipboard(text: string): Promise<boolean> {
+  try {
+    if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+
