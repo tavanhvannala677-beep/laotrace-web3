@@ -30,6 +30,7 @@ import {
 } from "./services/export";
 import { generateQRCode, type GeneratedQRData } from "./services/qrcode";
 import {
+  buildLabChainExplorerAddressUrl,
   formatThaiTimestamp as formatTimestamp,
   shortenWalletAddress as shortenAddress,
 } from "./utils/format";
@@ -476,9 +477,17 @@ export default function App() {
                       </h1>
                       <p className="text-xs text-slate-500">
                         หมวดหมู่: {p3Data.details.category} · ขึ้นทะเบียนโดยชาวสวน:{" "}
-                        <span className="font-mono text-slate-700">
+                        <a
+                          href={buildLabChainExplorerAddressUrl(
+                            p3Data.details.creator
+                          )}
+                          target="_blank"
+                          rel="noreferrer"
+                          title="ดูที่อยู่กระเป๋าบน LAB Chain Explorer"
+                          className="font-mono text-slate-700 hover:text-emerald-700 hover:underline"
+                        >
                           {shortenAddress(p3Data.details.creator)}
-                        </span>
+                        </a>
                       </p>
                       <div className="pt-1 flex flex-wrap items-center gap-3">
                         <button
@@ -546,9 +555,17 @@ export default function App() {
                               </div>
 
                               <div className="pt-1 flex items-center gap-3 text-xs text-slate-400">
-                                <span className="font-mono">
+                                <a
+                                  href={buildLabChainExplorerAddressUrl(
+                                    step.actor
+                                  )}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  title="ดูที่อยู่ผู้บันทึกบน LAB Chain Explorer"
+                                  className="font-mono hover:text-emerald-700 hover:underline"
+                                >
                                   ผู้บันทึก: {shortenAddress(step.actor)}
-                                </span>
+                                </a>
                                 <a
                                   href={imgUrl}
                                   target="_blank"
