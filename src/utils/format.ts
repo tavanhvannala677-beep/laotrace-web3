@@ -36,3 +36,19 @@ export function buildLabChainExplorerAddressUrl(address: string): string {
   const baseUrl = LAB_CHAIN_CONFIG.blockExplorerUrls[0].replace(/\/+$/, "");
   return `${baseUrl}/address/${encodeURIComponent(address.trim())}`;
 }
+
+/**
+ * สร้างลิงก์ตรวจสอบธุรกรรม (Transaction Hash) บน LAB Chain Explorer
+ */
+export function buildLabChainExplorerTxUrl(txHash: string): string {
+  const baseUrl = LAB_CHAIN_CONFIG.blockExplorerUrls[0].replace(/\/+$/, "");
+  return `${baseUrl}/tx/${encodeURIComponent(txHash.trim())}`;
+}
+
+/**
+ * ตรวจสอบความถูกต้องของรูปแบบที่อยู่กระเป๋า EVM (0x ตามด้วยเลขฐานสิบหก 40 ตัวอักษร)
+ */
+export function isValidEvmAddress(address: string): boolean {
+  return /^0x[a-fA-F0-9]{40}$/.test(address.trim());
+}
+
