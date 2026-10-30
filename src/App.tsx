@@ -24,8 +24,15 @@ import {
   type ProductTraceData,
 } from "./config/contract";
 import { resolveIpfsUrl, uploadToIPFS } from "./services/ipfs";
-import { exportProductCertificateJson } from "./services/export";
+import {
+  exportProductCertificateJson,
+  exportProductTimelineCsv,
+} from "./services/export";
 import { generateQRCode, type GeneratedQRData } from "./services/qrcode";
+import {
+  formatThaiTimestamp as formatTimestamp,
+  shortenWalletAddress as shortenAddress,
+} from "./utils/format";
 import {
   assignProductCustody,
   DEMO_WALLETS,
@@ -71,22 +78,6 @@ const CATEGORIES = [
     defaultReceiver: DEMO_WALLETS.TEA_COOP_C,
   },
 ];
-
-function shortenAddress(addr: string): string {
-  if (!addr || addr.length < 10) return addr;
-  return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
-}
-
-function formatTimestamp(ts: number): string {
-  if (!ts) return "-";
-  return new Date(ts * 1000).toLocaleString("th-TH", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
 
 function getInitialPage(): AppPage {
   if (typeof window === "undefined") return "consumer";
@@ -489,13 +480,21 @@ export default function App() {
                           {shortenAddress(p3Data.details.creator)}
                         </span>
                       </p>
-                      <div className="pt-1">
+                      <div className="pt-1 flex flex-wrap items-center gap-3">
                         <button
                           type="button"
                           onClick={() => exportProductCertificateJson(p3Data)}
                           className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 underline"
                         >
                           ดาวน์โหลดใบรับรอง JSON (EUDR Compliance)
+                        </button>
+                        <span className="text-slate-300">·</span>
+                        <button
+                          type="button"
+                          onClick={() => exportProductTimelineCsv(p3Data)}
+                          className="text-xs font-semibold text-slate-600 hover:text-slate-900 underline"
+                        >
+                          ดาวน์โหลดตารางประวัติ CSV (Excel)
                         </button>
                       </div>
                     </div>
