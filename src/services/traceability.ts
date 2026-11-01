@@ -126,6 +126,9 @@ const INITIAL_CUSTODY_MAP: Record<string, string> = {
   "1003": DEMO_WALLETS.TEA_COOP_C.toLowerCase(),
 };
 
+/**
+ * โหลดตารางการผูกสิทธิ์ผู้รับช่วงต่อ (Chain of Custody Map) จาก localStorage
+ */
 export function loadCustodyMap(): Record<string, string> {
   try {
     const raw = localStorage.getItem(CUSTODY_STORAGE_KEY);
@@ -133,12 +136,19 @@ export function loadCustodyMap(): Record<string, string> {
       localStorage.setItem(CUSTODY_STORAGE_KEY, JSON.stringify(INITIAL_CUSTODY_MAP));
       return { ...INITIAL_CUSTODY_MAP };
     }
-    return { ...INITIAL_CUSTODY_MAP, ...JSON.parse(raw) };
+    return { ...INITIAL_MOCK_CUSTODY_FALLBACK(), ...JSON.parse(raw) };
   } catch {
     return { ...INITIAL_CUSTODY_MAP };
   }
 }
 
+function INITIAL_MOCK_CUSTODY_FALLBACK(): Record<string, string> {
+  return { ...INITIAL_CUSTODY_MAP };
+}
+
+/**
+ * กำหนดสิทธิ์กระเป๋าผู้รับช่วงต่อ (กลางน้ำ) สำหรับล็อตสินค้าที่ระบุ
+ */
 export function assignProductCustody(productId: string, walletAddress: string): void {
   const cleanId = productId.trim();
   const cleanWallet = walletAddress.trim().toLowerCase();
@@ -152,11 +162,17 @@ export function assignProductCustody(productId: string, walletAddress: string): 
   }
 }
 
+/**
+ * ดึงที่อยู่กระเป๋ากลางน้ำที่ได้รับมอบหมายให้ดูแลล็อตสินค้านี้
+ */
 export function getAssignedWallet(productId: string): string {
   const map = loadCustodyMap();
   return map[productId.trim()] || "";
 }
 
+/**
+ * ตรวจสอบว่ากระเป๋าที่เชื่อมต่ออยู่มีสิทธิ์อัปเดตสถานะของล็อตสินค้านี้หรือไม่
+ */
 export function isWalletAuthorizedForBatch(
   productId: string,
   walletAddress: string
