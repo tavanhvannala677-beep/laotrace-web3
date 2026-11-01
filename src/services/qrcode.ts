@@ -75,4 +75,12 @@ export async function copyTextToClipboard(text: string): Promise<boolean> {
   }
 }
 
+/**
+ * คืนค่าลิงก์ตรงสำหรับเปิดดูหน้าใบรับรองสินค้า (Consumer Verification URL)
+ */
+export function buildConsumerVerificationUrl(productId: string): string {
+  return generateQRCode(productId).verificationUrl;
+}
+
+
 
