@@ -52,3 +52,28 @@ export function isValidEvmAddress(address: string): boolean {
   return /^0x[a-fA-F0-9]{40}$/.test(address.trim());
 }
 
+/**
+ * ดึงค่าพิกัดละติจูดและลองจิจูด (GPS) จากข้อความสถานที่หากมีการระบุไว้
+ */
+export function extractGpsCoordinates(
+  locationText: string
+): { lat: number; lng: number } | null {
+  const match = locationText.match(/(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)/);
+  if (!match) return null;
+  const lat = Number.parseFloat(match[1]);
+  const lng = Number.parseFloat(match[2]);
+  if (Number.isNaN(lat) || Number.isNaN(lng)) return null;
+  return { lat, lng };
+}
+
+/**
+ * คำนวณจำนวนวันทั้งหมดตั้งแต่ขั้นตอนแรกจนถึงขั้นตอนล่าสุดใน Timeline
+ */
+export function calculateJourneyDays(timestamps: number[]): number {
+  if (!timestamps || timestamps.length < 2) return 0;
+  const sorted = [...timestamps].sort((a, b) => a - b);
+  const diffSeconds = sorted[sorted.length - 1] - sorted[0];
+  return Math.max(0, Math.round(diffSeconds / 86400));
+}
+
+
