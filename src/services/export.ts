@@ -5,6 +5,9 @@ import { LAB_CHAIN_CONFIG, type ProductTraceData } from "../config/contract";
  * รองรับการตรวจสอบย้อนกลับตามมาตรฐานการส่งออก (เช่น EUDR Compliance)
  */
 export function exportProductCertificateJson(data: ProductTraceData): void {
+  const firstStep = data.timeline[0];
+  const lastStep = data.timeline[data.timeline.length - 1];
+
   const payload = {
     standard: "LaoTrace-Web3-Provenance-v1",
     network: {
@@ -14,6 +17,15 @@ export function exportProductCertificateJson(data: ProductTraceData): void {
       explorerUrl: LAB_CHAIN_CONFIG.blockExplorerUrls[0],
     },
     exportedAt: new Date().toISOString(),
+    summary: {
+      totalSteps: data.timeline.length,
+      firstRecordedAtIso: firstStep
+        ? new Date(firstStep.timestamp * 1000).toISOString()
+        : null,
+      lastUpdatedAtIso: lastStep
+        ? new Date(lastStep.timestamp * 1000).toISOString()
+        : null,
+    },
     product: data.details,
     provenanceTimeline: data.timeline.map((step, index) => ({
       stepNumber: index + 1,
