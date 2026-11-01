@@ -23,7 +23,11 @@ import {
   type ProductDetails,
   type ProductTraceData,
 } from "./config/contract";
-import { resolveIpfsUrl, uploadToIPFS } from "./services/ipfs";
+import {
+  resolveIpfsUrl,
+  shortenIpfsCid,
+  uploadToIPFS,
+} from "./services/ipfs";
 import {
   exportProductCertificateJson,
   exportProductTimelineCsv,
@@ -554,7 +558,7 @@ export default function App() {
                                 <span>{step.location}</span>
                               </div>
 
-                              <div className="pt-1 flex items-center gap-3 text-xs text-slate-400">
+                              <div className="pt-1 flex flex-wrap items-center gap-3 text-xs text-slate-400">
                                 <a
                                   href={buildLabChainExplorerAddressUrl(
                                     step.actor
@@ -566,6 +570,12 @@ export default function App() {
                                 >
                                   ผู้บันทึก: {shortenAddress(step.actor)}
                                 </a>
+                                <span
+                                  className="font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600"
+                                  title={`IPFS CID: ${step.ipfsHash}`}
+                                >
+                                  CID: {shortenIpfsCid(step.ipfsHash)}
+                                </span>
                                 <a
                                   href={imgUrl}
                                   target="_blank"
