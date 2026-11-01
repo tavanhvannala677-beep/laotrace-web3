@@ -63,3 +63,18 @@ export interface ProductTraceData {
   details: ProductDetails;
   timeline: TraceStepItem[];
 }
+
+export const LAB_CHAIN_EXPLORER_URL = LAB_CHAIN_CONFIG.blockExplorerUrls[0];
+
+/**
+ * แปลงรหัสหมวดหมู่สินค้าเป็นชื่อภาษาไทยสำหรับแสดงผลบนใบรับรอง
+ */
+export function getCategoryLabelThai(category: string): string {
+  const map: Record<string, string> = {
+    Coffee: "กาแฟโบลาเวน (Bolaven Coffee)",
+    Silk: "ผ้าไหมทอมือ (Handwoven Silk)",
+    Tea: "ชาออร์แกนิกโบราณ (Ancient Organic Tea)",
+  };
+  return map[category] || category;
+}
+
