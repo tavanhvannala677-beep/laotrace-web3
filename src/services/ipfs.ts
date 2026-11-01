@@ -171,3 +171,14 @@ export function isIpfsCid(value: string): boolean {
   return /^(Qm[1-9A-HJ-NP-Za-km-z]{44}|bafy[a-z2-7]{20,})$/i.test(cleaned);
 }
 
+/**
+ * ย่อรหัส IPFS CID ให้สั้นกระชับสำหรับแสดงเป็น Badge บนการ์ด Timeline (เช่น bafybei...001)
+ */
+export function shortenIpfsCid(cid: string): string {
+  if (!cid) return "-";
+  const cleaned = cid.replace(/^ipfs:\/\//, "").trim();
+  if (cleaned.length <= 16) return cleaned;
+  return `${cleaned.slice(0, 9)}...${cleaned.slice(-5)}`;
+}
+
+
