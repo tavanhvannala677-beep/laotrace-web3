@@ -25,6 +25,10 @@ export function exportProductCertificateJson(data: ProductTraceData): void {
       lastUpdatedAtIso: lastStep
         ? new Date(lastStep.timestamp * 1000).toISOString()
         : null,
+      creatorExplorerUrl: `${LAB_CHAIN_CONFIG.blockExplorerUrls[0].replace(
+        /\/+$/,
+        ""
+      )}/address/${data.details.creator}`,
     },
     product: data.details,
     provenanceTimeline: data.timeline.map((step, index) => ({
