@@ -76,4 +76,16 @@ export function calculateJourneyDays(timestamps: number[]): number {
   return Math.max(0, Math.round(diffSeconds / 86400));
 }
 
+/**
+ * สร้างลิงก์แผนที่ Google Maps จากพิกัด GPS ที่ระบุในข้อความสถานที่
+ */
+export function buildGoogleMapsUrlFromLocation(
+  locationText: string
+): string | null {
+  const coords = extractGpsCoordinates(locationText);
+  if (!coords) return null;
+  return `https://www.google.com/maps?q=${coords.lat},${coords.lng}`;
+}
+
+
 
