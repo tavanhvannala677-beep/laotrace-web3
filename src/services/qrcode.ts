@@ -82,5 +82,16 @@ export function buildConsumerVerificationUrl(productId: string): string {
   return generateQRCode(productId).verificationUrl;
 }
 
+/**
+ * คืนค่าลิงก์ตรงสำหรับส่งมอบงานให้ผู้ประกอบการกลางน้ำตามกระเป๋าที่ระบุ
+ */
+export function buildMidstreamHandoverUrl(
+  productId: string,
+  receiverWallet?: string
+): string {
+  return generateQRCode(productId, receiverWallet).midstreamHandoverUrl || "";
+}
+
+
 
 
