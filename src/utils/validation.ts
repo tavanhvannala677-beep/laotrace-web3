@@ -71,3 +71,21 @@ export function validateTraceStepInput(params: {
   }
   return { valid: true };
 }
+
+/**
+ * ตรวจสอบความถูกต้องของ Contract Address ที่กรอกในหน้าตั้งค่าเชื่อมต่อหลังบ้าน
+ */
+export function validateContractAddressInput(address: string): ValidationResult {
+  const clean = address.trim();
+  if (!clean) {
+    return { valid: false, errorMessage: "กรุณาระบุ Contract Address (0x...)" };
+  }
+  if (!isValidEvmAddress(clean)) {
+    return {
+      valid: false,
+      errorMessage: "รูปแบบ Contract Address ไม่ถูกต้อง (ต้องขึ้นต้นด้วย 0x และมี 42 ตัวอักษร)",
+    };
+  }
+  return { valid: true };
+}
+
