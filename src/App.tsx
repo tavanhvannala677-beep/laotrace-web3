@@ -35,6 +35,7 @@ import {
 import { generateQRCode, type GeneratedQRData } from "./services/qrcode";
 import {
   buildLabChainExplorerAddressUrl,
+  calculateJourneyDays,
   formatThaiTimestamp as formatTimestamp,
   shortenWalletAddress as shortenAddress,
 } from "./utils/format";
@@ -525,7 +526,11 @@ export default function App() {
                   <div className="flex items-center justify-between mb-5">
                     <h2 className="text-sm font-bold text-slate-900">
                       เส้นทางการเดินทางของสินค้าตั้งแต่วันเก็บเกี่ยว ({p3Data.timeline.length}{" "}
-                      ขั้นตอน)
+                      ขั้นตอน · รวม{" "}
+                      {calculateJourneyDays(
+                        p3Data.timeline.map((s) => s.timestamp)
+                      )}{" "}
+                      วัน)
                     </h2>
                     <span className="text-xs text-slate-400">
                       ข้อมูลล็อกถาวรบน Blockchain
