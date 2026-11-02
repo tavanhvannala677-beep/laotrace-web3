@@ -493,3 +493,12 @@ export function listProductsAssignedToWallet(walletAddress: string): ProductDeta
       return assigned === cleanWallet;
     });
 }
+
+/**
+ * นับจำนวนขั้นตอนทั้งหมดในประวัติการเดินทางของสินค้าล็อตนั้น
+ */
+export function getProductStepCount(data: ProductTraceData | null): number {
+  if (!data || !Array.isArray(data.timeline)) return 0;
+  return data.timeline.length;
+}
+
