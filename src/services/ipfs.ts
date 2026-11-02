@@ -181,4 +181,14 @@ export function shortenIpfsCid(cid: string): string {
   return `${cleaned.slice(0, 9)}...${cleaned.slice(-5)}`;
 }
 
+/**
+ * สร้างลิงก์เข้าถึงไฟล์บน Public IPFS Gateway มาตรฐาน (ipfs.io)
+ */
+export function buildPublicIpfsGatewayUrl(cid: string): string {
+  const cleaned = (cid || "").replace(/^ipfs:\/\//, "").trim();
+  if (!cleaned) return "";
+  return `https://ipfs.io/ipfs/${encodeURIComponent(cleaned)}`;
+}
+
+
 
