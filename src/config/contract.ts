@@ -65,6 +65,7 @@ export interface ProductTraceData {
 }
 
 export const LAB_CHAIN_EXPLORER_URL = LAB_CHAIN_CONFIG.blockExplorerUrls[0];
+export const LAB_CHAIN_RPC_URL = LAB_CHAIN_CONFIG.rpcUrls[0];
 
 /**
  * แปลงรหัสหมวดหมู่สินค้าเป็นชื่อภาษาไทยสำหรับแสดงผลบนใบรับรอง
@@ -77,4 +78,17 @@ export function getCategoryLabelThai(category: string): string {
   };
   return map[category] || category;
 }
+
+/**
+ * คืนค่าไอคอนสัญลักษณ์ประจำหมวดหมู่สินค้าพรีเมียมลาว
+ */
+export function getCategoryEmoji(category: string): string {
+  const emojiMap: Record<string, string> = {
+    Coffee: "☕",
+    Silk: "🧣",
+    Tea: "🍵",
+  };
+  return emojiMap[category] || "🌿";
+}
+
 
