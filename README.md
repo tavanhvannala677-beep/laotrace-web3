@@ -8,6 +8,8 @@
 
 - [`contracts/LaoTrace.sol`](contracts/LaoTrace.sol) — โค้ด Smart Contract (Solidity) สำหรับส่งให้เพื่อนฝั่งหลังบ้านนำไป Deploy บน Remix (`https://app.remix.live`)
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — เอกสารสรุปสถาปัตยกรรมระบบ, Data Flow, และระบบส่งมอบสิทธิ์ตามกระเป๋า (Chain of Custody)
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — คู่มือการตั้งค่า MetaMask และการ Deploy Smart Contract บน LAB Chain
+- [`docs/FAQ.md`](docs/FAQ.md) — คำถามที่พบบ่อยเกี่ยวกับระบบ LAB Chain, IPFS และการเชื่อมต่อหลังบ้าน
 - [`docs/PITCH_GUIDE.md`](docs/PITCH_GUIDE.md) — บทพูดนำเสนอโปรเจกต์ 3 นาที และแนวทางตอบคำถามกรรมการ
 - [`src/config/contract.ts`](src/config/contract.ts) — ตั้งค่าเครือข่าย LAB Chain, `DEFAULT_CONTRACT_ADDRESS` และ `LAOTRACE_ABI`
 - [`src/services/ipfs.ts`](src/services/ipfs.ts) — ฟังก์ชัน `uploadToIPFS(file)` และ `resolveIpfsUrl(ipfsHash)`
@@ -15,6 +17,7 @@
 - [`src/services/export.ts`](src/services/export.ts) — ฟังก์ชันส่งออกใบรับรองแหล่งกำเนิดสินค้าในรูปแบบ JSON (EUDR Compliance) และ CSV (สำหรับ Excel)
 - [`src/services/traceability.ts`](src/services/traceability.ts) — ฟังก์ชัน `fetchTraceabilityData()`, `submitRegisterProduct()`, `submitAddTraceStep()`, และ `listProductsAssignedToWallet()`
 - [`src/utils/format.ts`](src/utils/format.ts) — ฟังก์ชันช่วยจัดรูปแบบที่อยู่กระเป๋า, วันเวลาภาษาไทย และลิงก์ LAB Chain Explorer
+- [`src/utils/validation.ts`](src/utils/validation.ts) — ฟังก์ชันตรวจสอบความถูกต้องของข้อมูลก่อนส่งธุรกรรมขึ้น Blockchain
 - [`src/App.tsx`](src/App.tsx) — หน้าเว็บหลักแยก 3 หน้าตามบทบาทจริง (หน้าชาวสวนต้นน้ำ, หน้าผู้ประกอบการกลางน้ำ, และหน้าลูกค้าสแกนตรวจสอบ)
 
 ---
