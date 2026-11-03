@@ -190,5 +190,15 @@ export function buildPublicIpfsGatewayUrl(cid: string): string {
   return `https://ipfs.io/ipfs/${encodeURIComponent(cleaned)}`;
 }
 
+/**
+ * จัดรูปแบบรหัส CID ให้อยู่ในรูป URI มาตรฐาน `ipfs://<cid>`
+ */
+export function formatIpfsProtocolUri(cid: string): string {
+  const cleaned = (cid || "").replace(/^ipfs:\/\//, "").trim();
+  if (!cleaned) return "";
+  return `ipfs://${cleaned}`;
+}
+
+
 
 
