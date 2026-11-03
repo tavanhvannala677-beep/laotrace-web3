@@ -36,6 +36,7 @@ import { generateQRCode, type GeneratedQRData } from "./services/qrcode";
 import {
   buildLabChainExplorerAddressUrl,
   calculateJourneyDays,
+  formatRelativeTimeThai,
   formatThaiTimestamp as formatTimestamp,
   shortenWalletAddress as shortenAddress,
 } from "./utils/format";
@@ -552,6 +553,9 @@ export default function App() {
                                 </span>
                                 <span>·</span>
                                 <span>{formatTimestamp(step.timestamp)}</span>
+                                <span className="text-[11px] text-slate-400">
+                                  ({formatRelativeTimeThai(step.timestamp)})
+                                </span>
                               </div>
 
                               <div className="font-bold text-sm text-slate-900">
