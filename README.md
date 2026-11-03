@@ -8,9 +8,12 @@
 
 - [`contracts/LaoTrace.sol`](contracts/LaoTrace.sol) — โค้ด Smart Contract (Solidity) สำหรับส่งให้เพื่อนฝั่งหลังบ้านนำไป Deploy บน Remix (`https://app.remix.live`)
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — เอกสารสรุปสถาปัตยกรรมระบบ, Data Flow, และระบบส่งมอบสิทธิ์ตามกระเป๋า (Chain of Custody)
+- [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) — คู่มือการมีส่วนร่วมและแนวทางการพัฒนาโปรเจกต์
 - [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — คู่มือการตั้งค่า MetaMask และการ Deploy Smart Contract บน LAB Chain
 - [`docs/FAQ.md`](docs/FAQ.md) — คำถามที่พบบ่อยเกี่ยวกับระบบ LAB Chain, IPFS และการเชื่อมต่อหลังบ้าน
 - [`docs/PITCH_GUIDE.md`](docs/PITCH_GUIDE.md) — บทพูดนำเสนอโปรเจกต์ 3 นาที และแนวทางตอบคำถามกรรมการ
+- [`docs/SECURITY.md`](docs/SECURITY.md) — นโยบายความปลอดภัยของกระเป๋าและแนวปฏิบัติที่ดี
+- [`docs/TESTING_GUIDE.md`](docs/TESTING_GUIDE.md) — รายการตรวจสอบการทดสอบระบบครบทั้ง 3 เฟส
 - [`src/config/contract.ts`](src/config/contract.ts) — ตั้งค่าเครือข่าย LAB Chain, `DEFAULT_CONTRACT_ADDRESS` และ `LAOTRACE_ABI`
 - [`src/services/ipfs.ts`](src/services/ipfs.ts) — ฟังก์ชัน `uploadToIPFS(file)` และ `resolveIpfsUrl(ipfsHash)`
 - [`src/services/qrcode.ts`](src/services/qrcode.ts) — ฟังก์ชัน `generateQRCode(productId)` และ `buildConsumerShareText()`
