@@ -91,4 +91,12 @@ export function getCategoryEmoji(category: string): string {
   return emojiMap[category] || "🌿";
 }
 
+/**
+ * ดึงข้อมูลสรุปสถานะเครือข่าย LAB Chain สำหรับแสดงผลใน UI
+ */
+export function getLabChainConfigSummary(): string {
+  return `${LAB_CHAIN_CONFIG.chainName} (Chain ID: ${LAB_CHAIN_CONFIG.chainId}, Currency: ${LAB_CHAIN_CONFIG.nativeCurrency.symbol})`;
+}
+
+
 
