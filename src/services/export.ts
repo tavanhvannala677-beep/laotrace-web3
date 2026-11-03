@@ -48,7 +48,10 @@ export function exportProductCertificateJson(data: ProductTraceData): void {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `laotrace-certificate-${data.details.productId}.json`;
+  a.download = generateCertificateDownloadFileName(
+    data.details.productId,
+    "json"
+  );
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -106,4 +109,17 @@ export function exportProductTimelineCsv(data: ProductTraceData): void {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
+/**
+ * สร้างชื่อไฟล์สำหรับดาวน์โหลดเอกสารรับรองมาตรฐาน
+ */
+export function generateCertificateDownloadFileName(
+  productId: string,
+  extension: "json" | "csv"
+): string {
+  const cleanId = (productId || "batch").trim();
+  const dateStr = new Date().toISOString().slice(0, 10);
+  return `laotrace-certificate-${cleanId}-${dateStr}.${extension}`;
+}
+
 
