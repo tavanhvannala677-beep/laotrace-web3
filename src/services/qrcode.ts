@@ -92,6 +92,21 @@ export function buildMidstreamHandoverUrl(
   return generateQRCode(productId, receiverWallet).midstreamHandoverUrl || "";
 }
 
+/**
+ * สร้าง URL รูปภาพ QR Code แบบกำหนดขนาดและสีตามต้องการ
+ */
+export function buildCustomSizeQrImageUrl(
+  dataUrl: string,
+  size = 320,
+  hexColor = "064e3b"
+): string {
+  const cleanColor = hexColor.replace(/^#/, "");
+  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&margin=12&color=${cleanColor}&bgcolor=ffffff&data=${encodeURIComponent(
+    dataUrl
+  )}`;
+}
+
+
 
 
 
