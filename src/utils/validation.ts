@@ -89,3 +89,11 @@ export function validateContractAddressInput(address: string): ValidationResult 
   return { valid: true };
 }
 
+/**
+ * ทำความสะอาดคำค้นหาหรือรหัสล็อตสินค้า ป้องกันอักขระพิเศษที่ไม่จำเป็น
+ */
+export function sanitizeSearchQuery(query: string): string {
+  return query.trim().replace(/[<>'"`;()]/g, "");
+}
+
+
